@@ -77,6 +77,6 @@ Create `.env` inside `/server`
 
 PORT=5000
 
-MONGO_URI=your_mongodb_uri
+MONGO_URI=mongodb+srv://mishti-mongo:test123@cluster0.yr2cnmw.mongodb.net/test?retryWrites=true&w=majority
 
 JWT_SECRET=your_secret_key
