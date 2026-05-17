@@ -1,14 +1,12 @@
 import express from "express";
 import Lead from "../models/Lead";
-import { protect } from "../middleware/authMiddleware";
-import { adminOnly } from "../middleware/roleMiddleware";
 
 const router = express.Router();
 
 
 
 // CREATE LEAD
-router.post("/", protect, async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const lead = await Lead.create(req.body);
 
@@ -84,9 +82,9 @@ router.get("/", async (req, res) => {
 
     // SORTING
     const sortOption: any =
-  sort === "oldest"
-    ? { createdAt: 1 }
-    : { createdAt: -1 };
+      sort === "oldest"
+        ? { createdAt: 1 }
+        : { createdAt: -1 };
 
 
 
@@ -130,7 +128,7 @@ router.get("/:id", async (req, res) => {
 
 
 // UPDATE LEAD
-router.put("/:id", protect, async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const updatedLead = await Lead.findByIdAndUpdate(
       req.params.id,
@@ -154,7 +152,7 @@ router.put("/:id", protect, async (req, res) => {
 
 
 // DELETE LEAD
-router.delete("/:id", protect, adminOnly, async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     await Lead.findByIdAndDelete(req.params.id);
 
