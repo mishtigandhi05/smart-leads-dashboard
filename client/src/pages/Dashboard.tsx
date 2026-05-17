@@ -260,18 +260,47 @@ function Dashboard() {
                   {lead.source}
                 </td>
 
-                <td className="p-3">
+               <td className="p-3 flex gap-2">
 
-                  <button
-                    onClick={() =>
-                      deleteLead(lead._id)
-                    }
-                    className="bg-red-500 text-white px-3 py-1 rounded"
-                  >
-                    Delete
-                  </button>
+  <button
+    onClick={async () => {
+      const updatedName = prompt(
+        "Enter new name",
+        lead.name
+      );
 
-                </td>
+      if (!updatedName) return;
+
+      try {
+        await axios.put(
+          `https://smart-leads-api-e9gj.onrender.com/api/leads/${lead._id}`,
+          {
+            ...lead,
+            name: updatedName,
+          }
+        );
+
+        fetchLeads();
+
+      } catch (error) {
+        console.log(error);
+      }
+    }}
+    className="bg-yellow-500 text-white px-3 py-1 rounded"
+  >
+    Edit
+  </button>
+
+  <button
+    onClick={() =>
+      deleteLead(lead._id)
+    }
+    className="bg-red-500 text-white px-3 py-1 rounded"
+  >
+    Delete
+  </button>
+
+</td>
 
               </tr>
             ))}
